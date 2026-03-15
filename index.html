@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>АГ — ввод данных</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Система помощи в выборе терапии АГ</h1>
+    <p class="subtitle">Тестовый прототип: страница ввода данных</p>
+
+    <form id="patientForm">
+      <section class="card">
+        <h2>Основная информация</h2>
+        <div class="grid two">
+          <label>
+            <span>Возраст</span>
+            <input type="number" id="age" min="0" max="120" required />
+          </label>
+          <label>
+            <span>Пол</span>
+            <select id="sex" required>
+              <option value="">Выберите</option>
+              <option value="male">Мужской</option>
+              <option value="female">Женский</option>
+            </select>
+          </label>
+          <label>
+            <span>САД</span>
+            <input type="number" id="sbp" min="0" max="300" required />
+          </label>
+          <label>
+            <span>ДАД</span>
+            <input type="number" id="dbp" min="0" max="200" required />
+          </label>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Диагноз</h2>
+        <div class="grid two">
+          <label>
+            <span>Степень</span>
+            <input type="text" id="grade" readonly placeholder="Рассчитывается автоматически" />
+          </label>
+
+          <label>
+            <span>Стадия</span>
+            <select id="stageMode">
+              <option value="stage1">Стадия I</option>
+              <option value="stage2">Стадия II</option>
+              <option value="stage3">Стадия III</option>
+              <option value="auto">Определить</option>
+            </select>
+          </label>
+        </div>
+
+        <div id="stageDefinitionBlock" class="nested hidden">
+          <h3>Определение стадии</h3>
+          <div class="grid three">
+            <div>
+              <h4>Факторы риска</h4>
+              <div id="autoRiskFactors"></div>
+              <label class="checkbox always-risk"><input type="checkbox" data-group="riskFactors" value="Курение"> Курение</label>
+              <label class="checkbox always-risk"><input type="checkbox" data-group="riskFactors" value="Дислипидемия"> Дислипидемия</label>
+              <label class="checkbox always-risk"><input type="checkbox" data-group="riskFactors" value="Мочевая кислота ≥360 мкмоль/л"> Мочевая кислота (≥360 мкмоль/л)</label>
+              <label class="checkbox always-risk"><input type="checkbox" data-group="riskFactors" value="Нарушение гликемии натощак"> Нарушение гликемии натощак</label>
+              <label class="checkbox always-risk"><input type="checkbox" data-group="riskFactors" value="Нарушение толерантности к глюкозе"> Нарушение толерантности к глюкозе</label>
+              <label class="checkbox always-risk"><input type="checkbox" data-group="riskFactors" value="Избыточная масса тела или ожирение"> Избыточная масса тела или ожирение</label>
+              <label class="checkbox always-risk"><input type="checkbox" data-group="riskFactors" value="Абдоминальное ожирение"> Абдоминальное ожирение</label>
+              <label class="checkbox always-risk"><input type="checkbox" data-group="riskFactors" value="Отягощенный семейный анамнез по ССЗ"> Отягощенный семейный анамнез по ССЗ</label>
+              <label class="checkbox always-risk"><input type="checkbox" data-group="riskFactors" value="АГ в молодом возрасте в семье"> АГ в молодом возрасте в семье</label>
+              <label class="checkbox female-only"><input type="checkbox" data-group="riskFactors" value="Ранняя менопауза"> Ранняя менопауза</label>
+              <label class="checkbox always-risk"><input type="checkbox" data-group="riskFactors" value="Малоподвижный образ жизни"> Малоподвижный образ жизни</label>
+              <label class="checkbox always-risk"><input type="checkbox" data-group="riskFactors" value="Психологические и социально-экономические факторы"> Психологические и социально-экономические факторы</label>
+              <label class="checkbox always-risk"><input type="checkbox" data-group="riskFactors" value="ЧСС более 80 ударов в минуту"> ЧСС более 80 ударов в минуту</label>
+            </div>
+
+            <div>
+              <h4>Сопутствующие состояния и поражение органов-мишеней</h4>
+              <label class="checkbox"><input type="checkbox" data-group="targetOrgan" value="Сахарный диабет"> Сахарный диабет</label>
+              <label>
+                <span>ХБП</span>
+                <select id="ckdStage">
+                  <option value="none">Отсутствует</option>
+                  <option value="c3">С3</option>
+                  <option value="c4">С4</option>
+                  <option value="c5">С5</option>
+                </select>
+              </label>
+              <label class="checkbox"><input type="checkbox" data-group="targetOrgan" value="Пульсовое давление ≥60 мм рт. ст."> Пульсовое давление ≥ 60 мм рт. ст.</label>
+              <label class="checkbox"><input type="checkbox" data-group="targetOrgan" value="Каротидно-феморальная скорость распространения пульсовой волны >10 м/с"> Каротидно-феморальная скорость распространения пульсовой волны > 10 м/с</label>
+              <label class="checkbox"><input type="checkbox" data-group="targetOrgan" value="ЭКГ-признаки ГЛЖ"> Электрокардиографические признаки гипертрофии левого желудочка</label>
+              <label class="checkbox"><input type="checkbox" data-group="targetOrgan" value="ЭхоКГ-признаки ГЛЖ"> Эхокардиографические признаки гипертрофии левого желудочка</label>
+              <label class="checkbox"><input type="checkbox" data-group="targetOrgan" value="Альбуминурия 30–300 мг/24 ч"> Альбуминурия 30–300 мг / 24 ч</label>
+              <label class="checkbox"><input type="checkbox" data-group="targetOrgan" value="Лодыжечно-плечевой индекс <0,9"> Лодыжечно-плечевой индекс &lt; 0,9</label>
+              <label class="checkbox"><input type="checkbox" data-group="targetOrgan" value="Выраженная ретинопатия"> Выраженная ретинопатия</label>
+            </div>
+
+            <div>
+              <h4>Ассоциированные клинические состояния</h4>
+              <label class="checkbox"><input type="checkbox" data-group="associated" value="Цереброваскулярные заболевания"> Цереброваскулярные заболевания: ишемический инсульт, геморрагический инсульт, ТИА</label>
+              <label class="checkbox"><input type="checkbox" data-group="associated" value="ИБС"> ИБС: инфаркт миокарда, стенокардия, реваскуляризация миокарда</label>
+              <label class="checkbox"><input type="checkbox" data-group="associated" value="Атероматозные бляшки ≥50%"> Наличие атероматозных бляшек при визуализации (стеноз ≥50%)</label>
+              <label class="checkbox"><input type="checkbox" data-group="associated" value="Сердечная недостаточность"> Сердечная недостаточность, в том числе СН с сохраненной ФВ</label>
+              <label class="checkbox"><input type="checkbox" data-group="associated" value="Заболевание периферических артерий"> Заболевание периферических артерий</label>
+              <label class="checkbox"><input type="checkbox" data-group="associated" value="Фибрилляция предсердий"> Фибрилляция предсердий</label>
+            </div>
+          </div>
+          <div class="result-line">Определенная стадия: <strong id="autoStageText">—</strong></div>
+        </div>
+
+        <div class="grid two top-space">
+          <label>
+            <span>Риск</span>
+            <select id="riskMode">
+              <option value="low">Низкий</option>
+              <option value="moderate">Умеренный</option>
+              <option value="high">Высокий</option>
+              <option value="very-high">Очень высокий</option>
+              <option value="extreme">Экстремальный</option>
+              <option value="auto">Определить</option>
+            </select>
+          </label>
+        </div>
+
+        <div id="riskDefinitionBlock" class="nested hidden">
+          <h3>Определение риска</h3>
+          <div class="toggle-row">
+            <button type="button" class="toggle-btn active" data-risk-tab="score2">Рассчитать по SCORE2</button>
+            <button type="button" class="toggle-btn" data-risk-tab="clinical">Клинический расчёт</button>
+          </div>
+
+          <div id="score2Tab" class="risk-tab">
+            <div class="hint" id="score2ImageHint">Изображение SCORE2 подбирается по возрасту пациента.</div>
+            <label>
+              <span>Введите значение SCORE2</span>
+              <input type="number" id="score2Value" step="0.1" min="0" />
+            </label>
+            <div class="result-line">Определенный риск: <strong id="score2RiskText">—</strong></div>
+          </div>
+
+          <div id="clinicalTab" class="risk-tab hidden">
+            <div class="grid four clinical-grid">
+              <div>
+                <h4>1 ступень → умеренный</h4>
+                <label class="checkbox"><input type="checkbox" data-clinical-tier="1"> СД 1 типа у пациента моложе 35 лет</label>
+                <label class="checkbox"><input type="checkbox" data-clinical-tier="1"> СД 2 типа у пациента моложе 50 лет</label>
+                <label class="checkbox"><input type="checkbox" data-clinical-tier="1"> Длительность СД менее 10 лет без ПОМ и ФР</label>
+              </div>
+              <div>
+                <h4>2 ступень → высокий</h4>
+                <label class="checkbox"><input type="checkbox" data-clinical-tier="2"> Значимо выраженный ФР – ХС&gt;8 ммоль/л и/или ХС ЛНП &gt; 4,9 ммоль/л и/или АД ≥180/110</label>
+                <label class="checkbox"><input type="checkbox" data-clinical-tier="2"> СГХС без ФР</label>
+                <label class="checkbox"><input type="checkbox" data-clinical-tier="2"> СД без ПОМ, СД ≥10 лет или с ФР</label>
+                <label class="checkbox"><input type="checkbox" data-clinical-tier="2"> Умеренная ХБП с СКФ 30-59 мл/мин/1,73 м²</label>
+              </div>
+              <div>
+                <h4>3 ступень → очень высокий</h4>
+                <label class="checkbox"><input type="checkbox" data-clinical-tier="3"> Документированное атеросклеротическое ССЗ</label>
+                <label class="checkbox"><input type="checkbox" data-clinical-tier="3"> Документированное ССЗ по визуализации: стеноз ≥50%</label>
+                <label class="checkbox"><input type="checkbox" data-clinical-tier="3"> СД + ПОМ, ≥3 ФР, либо раннее начало СД1 &gt;20 лет</label>
+                <label class="checkbox"><input type="checkbox" data-clinical-tier="3"> Выраженная ХБП с СКФ &lt;30 мл/мин/1,73 м²</label>
+              </div>
+              <div>
+                <h4>4 ступень → экстремальный</h4>
+                <label class="checkbox"><input type="checkbox" data-clinical-tier="4"> Клинически значимое атеросклеротическое ССЗ + СД2 и/или СГХС или два СС-события за 2 года</label>
+              </div>
+            </div>
+            <div class="result-line">Определенный риск: <strong id="clinicalRiskText">—</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="actions">
+        <button type="submit" class="primary">Показать диагноз</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
