@@ -118,3 +118,19 @@ input[type="number"], input[type="text"], select {
 @media (max-width: 920px) {
   .grid.two, .grid.three, .grid.four, .summary-grid { grid-template-columns: 1fr; }
 }
+.score2-image-wrap {
+  margin: 12px 0 16px;
+}
+
+.score2-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid #d9d9d9;
+  background: #fff;
+}
+
+.hidden {
+  display: none;
+}
