@@ -95,15 +95,26 @@ function updateScore2Risk() {
   const age = Number(ageInput.value);
   const value = Number(score2Value.value);
   const hint = document.getElementById('score2ImageHint');
+  const image = document.getElementById('score2Image');
+
   if (!age) {
     hint.textContent = 'Сначала введите возраст пациента.';
+    image.src = '';
+    image.classList.add('hidden');
   } else if (age >= 40 && age <= 69) {
-    hint.textContent = 'Показывать изображение 1 (для возраста 40–69 лет).';
+    hint.textContent = 'Таблица SCORE2 для возраста 40–69 лет';
+    image.src = 'image1.png';
+    image.classList.remove('hidden');
   } else if (age >= 70) {
-    hint.textContent = 'Показывать изображение 2 (для возраста 70+ лет).';
+    hint.textContent = 'Таблица SCORE2-OP для возраста 70+ лет';
+    image.src = 'image2.png';
+    image.classList.remove('hidden');
   } else {
     hint.textContent = 'Возраст младше 40 лет — SCORE2 в текущем прототипе не предназначен для расчёта.';
+    image.src = '';
+    image.classList.add('hidden');
   }
+
   score2RiskText.textContent = calculateScore2Risk(age, value);
 }
 
