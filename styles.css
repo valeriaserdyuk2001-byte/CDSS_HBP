@@ -130,7 +130,3 @@ input[type="number"], input[type="text"], select {
   border: 1px solid #d9d9d9;
   background: #fff;
 }
-
-.hidden {
-  display: none;
-}
