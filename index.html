@@ -134,13 +134,24 @@
           </div>
 
           <div id="score2Tab" class="risk-tab">
-            <div class="hint" id="score2ImageHint">Изображение SCORE2 подбирается по возрасту пациента.</div>
-            <label>
-              <span>Введите значение SCORE2</span>
-              <input type="number" id="score2Value" step="0.1" min="0" />
-            </label>
-            <div class="result-line">Определенный риск: <strong id="score2RiskText">—</strong></div>
-          </div>
+  <div class="hint" id="score2ImageHint">Изображение SCORE2 подбирается по возрасту пациента.</div>
+
+  <div class="score2-image-wrap">
+    <img
+      id="score2Image"
+      src=""
+      alt="Таблица SCORE2"
+      class="score2-image hidden"
+    />
+  </div>
+
+  <label>
+    <span>Введите значение SCORE2</span>
+    <input type="number" id="score2Value" step="0.1" min="0" />
+  </label>
+
+  <div class="result-line">Определенный риск: <strong id="score2RiskText">—</strong></div>
+</div>
 
           <div id="clinicalTab" class="risk-tab hidden">
             <div class="grid four clinical-grid">
